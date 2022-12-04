@@ -1,7 +1,8 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.junit.After;
@@ -41,31 +42,38 @@ class AccordionItems {
     public void discoverFirstDropDown() {
         driver.findElement(firstHeading).click();
     }
+
     public void discoverSecondDropDown() {
         driver.findElement(secondHeading).click();
     }
+
     public void discoverThirdDropDown() {
         driver.findElement(thirdHeading).click();
     }
+
     public void discoverFourthDropDown() {
         driver.findElement(fourthHeading).click();
     }
+
     public void discoverFifthDropDown() {
         driver.findElement(fifthHeading).click();
     }
+
     public void discoverSixthDropDown() {
         driver.findElement(sixthHeading).click();
     }
+
     public void discoverSeventhDropDown() {
         driver.findElement(seventhHeading).click();
     }
+
     public void discoverEighthDropDown() {
         driver.findElement(eighthHeading).click();
     }
 
     public void pageScroller() {
         WebElement element = driver.findElement(By.id("accordion__heading-0"));
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
     // метод ожидания прогрузки данных профиля
@@ -84,45 +92,106 @@ class OrderMaker {
     private WebDriver driver;
 
     private By makeOrderHeaderButton = By.className("Button_Button__ra12g");
-    private By nameInput = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[1]");
+    private By nameInput = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[1]/input");
     private By surnameInput = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[2]/input");
     private By addressInput = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[3]/input");
-    private By phoneNumberInput = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[4]/input");
+    private By metroInput = By.xpath("/html/body/div/div/div[2]/div[2]/div[4]/div/div/input");
+    private By phoneNumberInput = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[5]/input");
     private By nextButton = By.xpath("/html/body/div/div/div[2]/div[3]/button");
+
+    private By dateInput = By.xpath("/html/body/div/div/div[2]/div[2]/div[1]/div/div/input");
+    private By rentTimeInput = By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[1]/div[1]");
+    private By colourCheckbox = By.className("Checkbox_Input__14A2w");
+    private By commentInput = By.xpath("/html/body/div/div/div[2]/div[2]/div[4]/input");
+    private By finishButton = By.xpath("/html/body/div/div/div[2]/div[3]/button[2]");
+    private By approveButton = By.xpath("/html/body/div/div/div[2]/div[5]/div[2]/button[2]");
+
 
     public OrderMaker(WebDriver driver) {
         this.driver = driver;
     }
+
     public void clickOrderButton() {
         driver.findElement(makeOrderHeaderButton).click();
     }
+
     public void setName(String name) {
         driver.findElement(nameInput).sendKeys(name);
     }
+
     public void setSurname(String surname) {
         driver.findElement(surnameInput).sendKeys(surname);
     }
+
     public void setAddress(String address) {
         driver.findElement(addressInput).sendKeys(address);
     }
+
+    public void setMetro(String metro) {
+        driver.findElement(metroInput).sendKeys(metro);
+        driver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[4]/div/div[2]/ul/li[1]/button")).click();
+    }
+    public void setDate(String date) {
+        driver.findElement(dateInput).sendKeys(date);
+        driver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div[7]")).click();
+    }
+    public void clickRentTime() {
+        driver.findElement(rentTimeInput).click();
+        driver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/div[2]/div[2]/div[1]")).click();
+    }
+
+    public void clickColourCheckbox() {
+        driver.findElement(colourCheckbox).click();
+    }
+
+    public void setCommentInput(String comment) {
+        driver.findElement(commentInput).sendKeys(comment);
+    }
+
     public void setPhoneNumber(String number) {
         driver.findElement(phoneNumberInput).sendKeys(number);
     }
+
+    public void clickFinishButton() {
+        driver.findElement(finishButton).click();
+    }
+
+    public void waitForOrderPageLoading() {
+        new WebDriverWait(driver, Duration.ofSeconds(15)).until(driver -> (driver.findElement(nameInput).isDisplayed()));
+    }
+
     public void clickNextButton() {
         driver.findElement(nextButton).click();
     }
 
-    public void firstPage(){ //String name, String surname, String address, String number
-        clickOrderButton();
+    public void waitForFinishOrder() {
+        new WebDriverWait(driver, Duration.ofSeconds(15)).until(driver -> (driver.findElement(dateInput).isDisplayed()));
+    }
+
+    public void clickApproveButton() {
+        driver.findElement(approveButton).click();
+    }
+
+    public void firstPage() { //String name, String surname, String address, String number
         setName("Имя");
         setSurname("Фамилия");
-        setAddress("Мякинино");
+        setAddress("Адрес");
+        setMetro("Мякинино");
         setPhoneNumber("79999999999");
         clickNextButton();
     }
+
+    public void secondPage() { //String name, String surname, String address, String number
+        setDate("04.12.2022");
+        clickRentTime();
+        clickColourCheckbox();
+        setCommentInput("комментарий");
+        clickFinishButton();
+    }
+
     public void pageScroller() {
         WebElement element = driver.findElement(By.className("Header_Nav__AGCXC"));
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 }
 
@@ -136,7 +205,8 @@ public class Main {
         // драйвер для браузера Chrome
         ChromeOptions options = new ChromeOptions();
         // options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
-        driver = new ChromeDriver(options);
+        //driver = new ChromeDriver(options);
+        driver = new FirefoxDriver();
         // переход на страницу тестового приложения
         driver.get("https://qa-scooter.praktikum-services.ru/");
 
@@ -166,37 +236,42 @@ public class Main {
 
         objAccordionItems.iHateCookie(); //закрыватель кук
 
-//        objAccordionItems.pageScroller(); //прокрутка до нужного элемента
-//        objAccordionItems.waitForLoadProfileData(); //ожидание прогрузки страницы
-//
-//        objAccordionItems.discoverFirstDropDown(); // раскрытие первого элемента списка
-//        objAccordionItems.waitForText(xPaths[0], expectedResult[0]); // сравнение текстов
-//
-//        objAccordionItems.discoverSecondDropDown(); // раскрытие второго элемента списка
-//        objAccordionItems.waitForText(xPaths[1], expectedResult[1]); // сравнение текстов
-//
-//        objAccordionItems.discoverThirdDropDown(); // раскрытие третьего элемента списка
-//        objAccordionItems.waitForText(xPaths[2], expectedResult[2]); // сравнение текстов
-//
-//        objAccordionItems.discoverFourthDropDown(); // раскрытие четвертого элемента списка
-//        objAccordionItems.waitForText(xPaths[3], expectedResult[3]); // сравнение текстов
-//
-//        objAccordionItems.discoverFifthDropDown(); // раскрытие пятого элемента списка
-//        objAccordionItems.waitForText(xPaths[4], expectedResult[4]); // сравнение текстов
-//
-//        objAccordionItems.discoverSixthDropDown(); // раскрытие шестого элемента списка
-//        objAccordionItems.waitForText(xPaths[5], expectedResult[5]); // сравнение текстов
-//
-//        objAccordionItems.discoverSeventhDropDown(); // раскрытие седьмого элемента списка
-//        objAccordionItems.waitForText(xPaths[6], expectedResult[6]); // сравнение текстов
-//
-//        objAccordionItems.discoverEighthDropDown(); // раскрытие восьмого элемента списка
-//        objAccordionItems.waitForText(xPaths[7], expectedResult[7]); // сравнение текстов
+        objAccordionItems.pageScroller(); //прокрутка до нужного элемента
+        objAccordionItems.waitForLoadProfileData(); //ожидание прогрузки страницы
+
+        objAccordionItems.discoverFirstDropDown(); // раскрытие первого элемента списка
+        objAccordionItems.waitForText(xPaths[0], expectedResult[0]); // сравнение текстов
+
+        objAccordionItems.discoverSecondDropDown(); // раскрытие второго элемента списка
+        objAccordionItems.waitForText(xPaths[1], expectedResult[1]); // сравнение текстов
+
+        objAccordionItems.discoverThirdDropDown(); // раскрытие третьего элемента списка
+        objAccordionItems.waitForText(xPaths[2], expectedResult[2]); // сравнение текстов
+
+        objAccordionItems.discoverFourthDropDown(); // раскрытие четвертого элемента списка
+        objAccordionItems.waitForText(xPaths[3], expectedResult[3]); // сравнение текстов
+
+        objAccordionItems.discoverFifthDropDown(); // раскрытие пятого элемента списка
+        objAccordionItems.waitForText(xPaths[4], expectedResult[4]); // сравнение текстов
+
+        objAccordionItems.discoverSixthDropDown(); // раскрытие шестого элемента списка
+        objAccordionItems.waitForText(xPaths[5], expectedResult[5]); // сравнение текстов
+
+        objAccordionItems.discoverSeventhDropDown(); // раскрытие седьмого элемента списка
+        objAccordionItems.waitForText(xPaths[6], expectedResult[6]); // сравнение текстов
+
+        objAccordionItems.discoverEighthDropDown(); // раскрытие восьмого элемента списка
+        objAccordionItems.waitForText(xPaths[7], expectedResult[7]); // сравнение текстов
 
         OrderMaker objOrderMaker = new OrderMaker(driver);
-        //objOrderMaker.pageScroller();
-        //objOrderMaker.clickNextButton();
+        objOrderMaker.clickOrderButton();
+        objOrderMaker.waitForOrderPageLoading();
+        objOrderMaker.pageScroller();
+        objOrderMaker.clickNextButton();
         objOrderMaker.firstPage();
+        objOrderMaker.secondPage();
+        objOrderMaker.waitForFinishOrder();
+        objOrderMaker.clickApproveButton();
 
     }
 
