@@ -19,8 +19,8 @@ public class Main {
     public static void init() {
         // драйвер для браузера Chrome
         ChromeOptions options = new ChromeOptions();
-        //driver = new ChromeDriver(options);
-        driver = new FirefoxDriver();
+        driver = new ChromeDriver(options);
+        //driver = new FirefoxDriver();
     }
     @Before
             public void beforeEach() {

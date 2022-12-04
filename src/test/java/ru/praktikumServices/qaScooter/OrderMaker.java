@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.Objects;
 
 import static ru.praktikumServices.qaScooter.PageObject.CheckForOrders.*;
 
@@ -73,7 +72,8 @@ class OrderMaker {
 
 
     public void waitForFinalText() {
-        new WebDriverWait(driver, Duration.ofSeconds(15)).until(driver -> (Objects.equals(driver.findElement(finalText).getText(), "Заказ оформлен")));
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(driver -> (
+            driver.findElement(finalText).getText().equals("Посмотреть статус")));
     }
 
     public void clickApproveButton() {

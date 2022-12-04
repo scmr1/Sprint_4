@@ -19,5 +19,5 @@ public class CheckForOrders {
     public static By commentInput = By.xpath("/html/body/div/div/div[2]/div[2]/div[4]/input"); // Поле ввода комментария
     public static By finishButton = By.xpath("/html/body/div/div/div[2]/div[3]/button[2]"); // Кнопка завершения создания заказа
     public static By approveButton = By.xpath("/html/body/div/div/div[2]/div[5]/div[2]/button[2]"); // Кнопка подтверждения создания
-    public static By finalText = By.xpath("/html/body/div/div/div[2]/div[5]/div[1]"); // Текст о создании заказа
+    public static By finalText = By.xpath("/html/body/div/div/div[2]/div[5]/div[2]/button"); // Текст о создании заказа
 }
