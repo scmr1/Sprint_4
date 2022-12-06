@@ -3,7 +3,8 @@ package ru.praktikumServices.qaScooter.PageObject;
 import org.openqa.selenium.By;
 
 public class CheckForOrders {
-    public static By makeOrderHeaderButton = By.className("Button_Button__ra12g"); // Кнопка создания заказа
+    public static By makeOrderHeaderButton = By.cssSelector("#root > div > div > div.Header_Header__214zg > div.Header_Nav__AGCXC > button.Button_Button__ra12g"); // Кнопка создания заказа
+    public static By makeOrderBodyButton = By.cssSelector("#root > div > div > div.Home_ThirdPart__LSTEE > div.Home_RoadMap__2tal_ > div.Home_FinishButton__1_cWm > button");
     public static By nameInput = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[1]/input"); // Поле ввода имени
     public static By surnameInput = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[2]/input"); // Поле ввода фамилии
     public static By addressInput = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[3]/input"); // Поле ввода адреса

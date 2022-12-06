@@ -33,6 +33,7 @@ public class DropDownListTest {
         // переход на страницу тестового приложения
         driver.get("https://qa-scooter.praktikum-services.ru/");
     }
+
     private final String realText;
     private final String expectedText;
     private final int number;
@@ -61,7 +62,7 @@ public class DropDownListTest {
                         "/html/body/div/div/div/div[5]/div[2]/div/div[6]/div[2]/p", 5},
                 {"Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.",
                         "/html/body/div/div/div/div[5]/div[2]/div/div[7]/div[2]/p", 6},
-                {"Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.",
+                {"Да, обязательно. Всем самокатов! И Москве, и Московской области.",
                         "/html/body/div/div/div/div[5]/div[2]/div/div[8]/div[2]/p", 7},
         };
     }
@@ -77,12 +78,8 @@ public class DropDownListTest {
 
         dropDownLists.openDropdown(dropDowns[number]);
         dropDownLists.waitForText(expectedText, realText);
-
-//        for(int i=0; i<dropDowns.length;i++){
-//           dropDownLists.openDropdown(dropDowns[i]); // раскрытие элементов списка
-//            // сравнение текстов
-//        }
     }
+
     @AfterClass
     public static void teardown() {
         driver.quit();

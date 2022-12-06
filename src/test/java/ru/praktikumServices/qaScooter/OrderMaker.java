@@ -19,6 +19,10 @@ class OrderMaker {
         driver.findElement(makeOrderHeaderButton).click();
     }
 
+    public void clickBodyButton() {
+        driver.findElement(makeOrderBodyButton).click();
+    }
+
     public void setName(String name) {
         driver.findElement(nameInput).sendKeys(name);
     }
@@ -73,7 +77,7 @@ class OrderMaker {
 
     public void waitForFinalText() {
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(driver -> (
-            driver.findElement(finalText).getText().equals("Посмотреть статус")));
+                driver.findElement(finalText).getText().equals("Посмотреть статус")));
     }
 
     public void clickApproveButton() {
